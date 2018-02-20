@@ -25,6 +25,7 @@ get_last_error: Callable = kernel32.GetLastError
 read_process_memory: Callable = kernel32.ReadProcessMemory
 write_process_memory: Callable = kernel32.WriteProcessMemory
 
+
 class PyMem:
     def open_process(self, process_name: str):
         processes = (proc for proc in psutil.process_iter() if proc.name() == process_name)
@@ -88,7 +89,8 @@ class PyMem:
         except Exception as e:
             close_handle(process)
             print(e)
-            print('[writing] Windows response:\n', get_last_error())
+            print('[writing] Windows response:\n',
+                  get_last_error())
             raise e
 
 
